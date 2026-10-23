@@ -40,12 +40,14 @@ const DEFAULT_LOGO = '/images/logo.png';
 const SUSCRIPCION_PAGO = 'pago';
 const WHATSAPP_DESCONECTADO = 'DISCONNECTED';
 
+// Definicion de variables y asignacion de valores por default
 const defaultLocals = () => ({
     esPremium: false,
     userLogo: DEFAULT_LOGO,
     whatsappStatus: WHATSAPP_DESCONECTADO,
 });
 
+// Obtener logo del reseller si su suscripcion es de pago
 async function obtenerBranding(userId) {
     const [rows] = await db.query(
         `SELECT u.suscripcion, c.logo_empresa
@@ -63,6 +65,7 @@ async function obtenerBranding(userId) {
     };
 }
 
+// Exportamos el estado inicial del reseller con su logo y conexion de WhatsApp
 app.use(async (req, res, next) => {
     Object.assign(res.locals, defaultLocals());
 
